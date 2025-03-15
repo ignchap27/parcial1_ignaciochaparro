@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Container, Alert, Spinner, Row, Col } from 'react-bootstrap';
 import RobotDetail from './RobotDetail';
+import { FormattedMessage } from 'react-intl';
 
 function Listado() {
     const [robots, setRobots] = useState([]);
@@ -63,10 +64,10 @@ function Listado() {
                         <Table striped bordered hover responsive>
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Nombre</th>
-                                    <th>Modelo</th>
-                                    <th>Compañía</th>
+                                    <th><FormattedMessage id="ID"/></th>
+                                    <th><FormattedMessage id="Name"/></th>
+                                    <th><FormattedMessage id="Model"/></th>
+                                    <th><FormattedMessage id="Company"/></th>
                                 </tr>
                             </thead>
                             <tbody>

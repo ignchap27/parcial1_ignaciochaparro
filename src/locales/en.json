@@ -1,0 +1,15 @@
+{
+    "ID":"ID",
+    "Name":"Name",
+    "Model":"Model",
+    "Company":"Company",
+    "Manufacturing year":"Manufacturing year",
+    "Capacity":"Capacity",
+    "Humor":"Humor",
+    "Username":"Username",
+    "Password":"Password",
+    "Login":"Login",
+    "Adopt a Robot with Robo Lovers!":"Adopt a Robot with Robo Lovers!",
+    "loginButton": "Login",
+    "cancelButton": "Cancel"
+}

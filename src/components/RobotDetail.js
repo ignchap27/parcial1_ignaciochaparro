@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, Image } from 'react-bootstrap';
+import {FormattedMessage} from 'react-intl';
 
 function RobotCard({ robot }) {
 
@@ -19,11 +20,11 @@ function RobotCard({ robot }) {
           <Image src={imageUrl} alt={robot.nombre} fluid style={{ maxHeight: '250px', objectFit: 'contain' }} />
         </div>
         <Card.Text>
-          <strong>Año de fabricación:</strong> {robot.añoFabricacion}
+          <strong><FormattedMessage id="Manufacturing year"/></strong> {robot.añoFabricacion}
           <br />
-          <strong>Capacidad de Procesamiento:</strong> {robot.capacidadProcesamiento}
+          <strong><FormattedMessage id="Capacity"/></strong> {robot.capacidadProcesamiento}
           <br />
-          <strong>Humor:</strong> {robot.humor}
+          <strong><FormattedMessage id="Humor"/></strong> {robot.humor}
         </Card.Text>
       </Card.Body>
     </Card>
