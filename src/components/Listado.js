@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Container, Alert, Spinner, Card } from 'react-bootstrap';
+import { Table, Container, Alert, Spinner, Row, Col } from 'react-bootstrap';
 import RobotDetail from './RobotDetail';
 
 function Listado() {
@@ -29,8 +29,10 @@ function Listado() {
         fetchRobots();
     }, []);
 
-    const handleRowClick = (robot) => {
-        setSelectedRobot(robot);
+    const handleRowClick = async (robot) => {
+        const responde = await fetch(`http://localhost:3001/robots/${robot.id}`);   
+        const data_robot = await responde.json();
+        setSelectedRobot(data_robot);
     };
 
     if (loading) {
@@ -53,41 +55,44 @@ function Listado() {
 
     return (
         <Container className="mt-4">
-            <h1 className="mb-4">Listado de Robots</h1>
             {robots.length === 0 ? (
                 <Alert variant="info">No hay robots disponibles</Alert>
             ) : (
-                <>
-                    <Table striped bordered hover responsive>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre</th>
-                                <th>Modelo</th>
-                                <th>Compañía</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {robots.map((robot) => (
-                                <tr 
-                                    key={robot.id}
-                                    onClick={() => handleRowClick(robot)}
-                                    className={selectedRobot && selectedRobot.id === robot.id ? "table-primary" : ""}
-                                    style={{ cursor: "pointer" }}
-                                >
-                                    <td>{robot.id}</td>
-                                    <td>{robot.nombre}</td>
-                                    <td>{robot.modelo}</td>
-                                    <td>{robot.empresaFabricante}</td>
+                <Row>
+                    <Col md={6}>
+                        <Table striped bordered hover responsive>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Modelo</th>
+                                    <th>Compañía</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </Table>
+                            </thead>
+                            <tbody>
+                                {robots.map((robot) => (
+                                    <tr 
+                                        key={robot.id}
+                                        onClick={() => handleRowClick(robot)}
+                                        className={selectedRobot && selectedRobot.id === robot.id ? "table-primary" : ""}
+                                        style={{ cursor: "pointer" }}
+                                    >
+                                        <td>{robot.id}</td>
+                                        <td>{robot.nombre}</td>
+                                        <td>{robot.modelo}</td>
+                                        <td>{robot.empresaFabricante}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </Table>
+                    </Col>
 
-                    {selectedRobot && (
-                        <RobotDetail robot={selectedRobot} />
-                    )}
-                </>
+                    <Col md={4}>
+                        {selectedRobot && (
+                            <RobotDetail robot={selectedRobot} />
+                        )}
+                    </Col>
+                </Row>
             )}
         </Container>
     );
